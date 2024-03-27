@@ -1,6 +1,6 @@
 
-import VueControleur.VueControleur;
-import modele.Jeu;
+import VueControleur.ViewControler;
+import modele.Game;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -11,9 +11,9 @@ import modele.Jeu;
 
 public class Main {
     public static void main(String[] args) {
-        Jeu jeu = new Jeu();
+        Game game = new Game();
         
-        VueControleur vc = new VueControleur(jeu);
+        ViewControler vc = new ViewControler(game);
         vc.setVisible(true);
 
     }
