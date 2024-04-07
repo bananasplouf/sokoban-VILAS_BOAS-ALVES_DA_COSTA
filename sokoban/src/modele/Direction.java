@@ -9,6 +9,7 @@ package modele;
  *
  *
  */
-public enum Direction {
+public enum Direction
+{
     haut, bas, gauche, droite
 }

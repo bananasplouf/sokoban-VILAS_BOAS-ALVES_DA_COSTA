@@ -1,6 +1,8 @@
 
 import VueControleur.ViewControler;
 import modele.Game;
+import java.util.Observable;
+import java.util.Observer;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -9,12 +11,21 @@ import modele.Game;
  */
 
 
-public class Main {
-    public static void main(String[] args) {
+public class Main
+{
+    public static void main(String[] args)
+    {
         Game game = new Game();
+        Observable o = new Observable();
+        Object ob = new Object();
         
         ViewControler vc = new ViewControler(game);
-        vc.setVisible(true);
+        while(true)
+        {
+            //vc.switchWindows();
+            vc.update(o,ob);
+        }
+
 
     }
 }
