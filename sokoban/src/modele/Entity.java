@@ -3,7 +3,8 @@ package modele;
 /**
  * Entités amenées à bouger
  */
-public abstract class Entity extends Obj {
+public abstract class Entity extends Obj
+{
 
     protected Tile t;
 
@@ -30,8 +31,8 @@ public abstract class Entity extends Obj {
     }
 
 
-    public boolean avancerDirectionChoisie(Direction d) {
-
+    public boolean avancerDirectionChoisie(Direction d)
+    {
         return game.moveEntity(this, d);
     }
 
