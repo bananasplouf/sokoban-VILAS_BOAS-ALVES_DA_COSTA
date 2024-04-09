@@ -232,9 +232,6 @@ public class Game extends Observable
                             entityGrid[j][i].setEntity(hero);
                             n_hero++;
                             break;
-                        default:
-                           addTile(new Empty(this), j, i);
-                            break;
                     }
                 }
             }
@@ -249,32 +246,5 @@ public class Game extends Observable
             System.out.println("An error occurred while reading from the file.");
             e.printStackTrace();
         }
-
     }
-
-
-    /*
-    public void test(String fileName) {
-        try {
-
-            System.out.println("debut_test");
-            BufferedReader reader = new BufferedReader(new FileReader(fileName));
-            int x = Integer.parseInt(reader.readLine());
-            int y = Integer.parseInt(reader.readLine());
-            for (int i = 0; i < y; i++) {
-                String line = reader.readLine();
-                String[] tiles = line.split(",");
-                for (int j = 0; j < x; j++) {
-                    System.out.print(tiles[j] + "|");
-                }
-                System.out.println();
-            }
-            reader.close();
-            System.out.println("fin_test");
-        } catch (IOException e) {
-            System.out.println("An error occurred while reading from the file.");
-            e.printStackTrace();
-        }
-    }
-    */
 }
