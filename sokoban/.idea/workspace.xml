@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="baf99f6f-f684-484b-8035-53f217639bb4" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/sokoban.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/sokoban/Main.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/sokoban/VueControleur/ViewControler$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/sokoban/VueControleur/ViewControler.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/sokoban/VueControleur/ViewMenu.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/sokoban/modele/Block.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/sokoban/modele/Block.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/sokoban/modele/Direction.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/sokoban/modele/Empty.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/sokoban/modele/Entity.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/sokoban/modele/Entity.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/sokoban/modele/Game$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/sokoban/modele/Game.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/sokoban/modele/Hero.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/sokoban/modele/Obj.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/sokoban/modele/Obj.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/sokoban/modele/Tile.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/sokoban/modele/Wall.class" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 6
+}</component>
+  <component name="ProjectId" id="2epqbGtoYGrlusLaWl2VhcN8CyS" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/paco/Documents/0_COURS/lifPOO/Projet/sokoban-VILAS_BOAS-ALVES_DA_COSTA/sokoban&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RunManager">
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="sokoban" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="sokoban" />
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="baf99f6f-f684-484b-8035-53f217639bb4" name="Changes" comment="" />
+      <created>1712611936498</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1712611936498</updated>
+      <workItem from="1712611937540" duration="4241000" />
+      <workItem from="1712650468843" duration="4317000" />
+      <workItem from="1712669115688" duration="17962000" />
+      <workItem from="1712696538185" duration="491000" />
+      <workItem from="1712697056260" duration="21000" />
+      <workItem from="1712697092700" duration="27000" />
+      <workItem from="1712697136600" duration="262000" />
+      <workItem from="1712697472908" duration="318000" />
+      <workItem from="1712697798774" duration="49000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
