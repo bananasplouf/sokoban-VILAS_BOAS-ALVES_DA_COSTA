@@ -47,9 +47,5 @@ public abstract class Tile extends Obj
         e = _e;
         e.setTile(this);
     }
-    @Override
-    public String mapString()
-    {
-        return "";
-    }
+    public abstract String mapString();
 }

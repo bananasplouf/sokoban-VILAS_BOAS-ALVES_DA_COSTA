@@ -14,7 +14,6 @@ public class Hero extends Entity
     {
         super(_game, t);
     }
-
     public boolean isSleeping() {
         return getIndex() != game.getCurrentHero();
     }
@@ -22,7 +21,6 @@ public class Hero extends Entity
     public int getIndex() {
         return game.getHeroIndex(this);
     }
-    @Override
     public String mapString() {
         return "H" + getIndex();
     }
