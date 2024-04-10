@@ -10,6 +10,14 @@ import javax.swing.*;
 import java.awt.Point;
 import java.util.HashMap;
 import java.util.Observable;
+import java.util.List; // Pour gérer une liste
+import java.util.ArrayList; // Pour gérer une liste
+import java.io.PrintWriter; // Pour écrire dans un fichier
+import java.io.IOException; // Pour gérer les exceptions liées à l'écriture dans un fichier
+import java.io.BufferedReader; // Pour lire un fichier
+import java.io.FileReader; // Pour lire un fichier
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
 
 
 public class Game extends Observable
@@ -19,16 +27,19 @@ public class Game extends Observable
     public static final int SIZE_Y = 10;
 
 
-    private Hero hero;
+    private final List<Hero> heroes = new ArrayList<>();
 
     private final HashMap<Tile, Point> map = new  HashMap<Tile, Point>(); // permet de récupérer la position d'une case à partir de sa référence
     private final Tile[][] entityGrid = new Tile[SIZE_X][SIZE_Y]; // permet de récupérer une case à partir de ses coordonnées
-
+    private final List<Target> targets = new ArrayList<>();
+    private final List<Block> blocks = new ArrayList<>();
+    private int currentHero = 0;
+    private int maxHero = 3;
 
 
     public Game()
     {
-        initializeLevel();
+        game.readMapFromFile("maps/level1");
     }
 
 
@@ -37,15 +48,17 @@ public class Game extends Observable
         return entityGrid;
     }
     
-    public Hero getHero() {
-        return hero;
+    public Hero getHero(int i) {
+        return heroes.get(i);
     }
 
-    public void moveHero(Direction d)
-    {
-        hero.avancerDirectionChoisie(d);
+    public void moveHero(Direction d,int i) {
+        heroes.get(i).avancerDirectionChoisie(d);
         setChanged();
         notifyObservers();
+    }
+    public void moveHero(Direction d) {
+        moveHero(d,currentHero);
     }
 
 
@@ -79,8 +92,11 @@ public class Game extends Observable
             }
         }
 
-        hero = new Hero(this, entityGrid[4][4]);
-        Block b = new Block(this, entityGrid[6][6]);
+        heroes.add(new Hero(this, entityGrid[4][4]));
+        blocks.add(new Block(this, entityGrid[6][6]));
+
+        targets.add(new Target(this));
+        addTile(targets.get(0), 17, 7);
     }
 
     private void addTile(Tile e, int x, int y) {
@@ -163,32 +179,29 @@ public class Game extends Observable
         return back;
     }
 
-    public String tileTypeString(Tile t) {
-        if (t.getEntity() instanceof Block) {
-            return "B";
-        } else if (t.getEntity() instanceof Hero) {
-            return "H";
-        } else if (t instanceof Empty) {
-            return "_";
-        } else if (t instanceof Wall) {
-            return "W";
-        } else {
-            return " ";
-        }
-    }
+
 
     public void writeMapToFile(String fileName) {
-        int n_hero = 0;
-        Tile heroTile = hero.getTile(); // Obtenez le Tile associé au héros
-        Point heroPosition = map.get(heroTile); // Obtenez la position de ce Tile à partir de la HashMap
-        //System.out.println(hero.getTile().getEntity().getClass().getName());
         try {
             PrintWriter writer = new PrintWriter(fileName, "UTF-8");
             writer.println(SIZE_X);
             writer.println(SIZE_Y);
             for (int i = 0; i < SIZE_Y; i++) {
                 for (int j = 0; j < SIZE_X; j++) {
-                    writer.print(tileTypeString(entityGrid[j][i]) + ",");
+                    Tile t = entityGrid[j][i];
+                    String type = "";
+                    if (t.getEntity() instanceof Block) {
+                        type = "B" + blocks.indexOf(t.getEntity());
+                    } else if (t instanceof Target) {
+                        type = "T" + targets.indexOf(t);
+                    } else if (t.getEntity() instanceof Hero) {
+                        type = "H"+ heroes.indexOf(t.getEntity());
+                    } else if (t instanceof Empty) {
+                        type = "_";
+                    } else if (t instanceof Wall) {
+                        type = "W";
+                    }
+                    writer.print( type + ",");
                 }
                 writer.println();
             }
@@ -205,7 +218,9 @@ public class Game extends Observable
      * @param fileName the name of the file to read from
      */
     public void readMapFromFile(String fileName) {
-        int n_hero = 0;
+        Hero[] tempHeroes = new Hero[ 256 ];
+        Block[] tempBlocks = new Block[ 256 ];
+        Target[] tempTargets = new Target[ 256 ];
         try {
             BufferedReader reader = new BufferedReader(new FileReader(fileName));
             int x = Integer.parseInt(reader.readLine());
@@ -215,36 +230,74 @@ public class Game extends Observable
                 String line = reader.readLine();
                 String[] tiles = line.split(",");
                 for (int j = 0; j < x; j++) {
-                    switch (tiles[j]) {
-                        case "_":
-                            addTile(new Empty(this), j, i);
-                            break;
-                        case "W":
-                            addTile(new Wall(this), j, i);
-                            break;
-                        case "B":
-                            addTile(new Empty(this), j, i);
-                            entityGrid[j][i].setEntity(new Block(this, entityGrid[j][i]));
-                            break;
-                        case "H":
-                            addTile(new Empty(this), j, i);
-                            hero = new Hero(this, entityGrid[j][i]);
-                            entityGrid[j][i].setEntity(hero);
-                            n_hero++;
-                            break;
+                    String type = tiles[j];
+                    Pattern pattern = Pattern.compile("[HBT](\\d+)");
+                    Matcher matcher = pattern.matcher(type);
+                    if (matcher.find()) {
+                        String letter = matcher.group(0);
+                        int num = Integer.parseInt(matcher.group(1));
+                        switch (letter) {
+                            case "B":
+                                tempBlocks[num] = new Block(this, entityGrid[j][i]);
+                                addTile(new Empty(this), j, i);
+                                entityGrid[j][i].setEntity(tempBlocks[num]);
+                                break;
+                            case "H":
+                                tempHeroes[num] = new Hero(this, entityGrid[j][i]);
+                                addTile(new Empty(this), j, i);
+                                entityGrid[j][i].setEntity(tempHeroes[num]);
+                                break;
+                            case "T":
+                                tempTargets[num] = new Target(this);
+                                addTile(tempTargets[num], j, i);
+                                break;
+                        }
+                    } else {
+                        switch (tiles[j]) {
+                            case "_":
+                                addTile(new Empty(this), j, i);
+                                break;
+                            case "W":
+                                addTile(new Wall(this), j, i);
+                                break;
+                        }
                     }
                 }
             }
             reader.close();
-            for (int i = 0; i < SIZE_Y; i++) {
-                for (int j = 0; j < SIZE_X; j++) {
-                    System.out.print(tileTypeString(entityGrid[j][i]) + ",");
-                }
-                System.out.println();
+            heroes.clear();
+            blocks.clear();
+            targets.clear();
+            for (Hero hero : tempHeroes) {
+
+            if (hero != null) {
+                heroes.add(hero);
             }
+        }
+        for (Block block : tempBlocks) {
+            if (block != null) {
+                blocks.add(block);
+            }
+        }
+        for (Target target : tempTargets) {
+            if (target != null) {
+                targets.add(target);
+            }
+        }
         } catch (IOException e) {
             System.out.println("An error occurred while reading from the file.");
             e.printStackTrace();
         }
+    }
+
+    public void checkGameOver() {
+        for (int i = 0; i < targets.size(); i++) {
+            if (!targets.get(i).isFilled()) {
+                return;
+            }
+        }
+        // Si on arrive ici, toutes les cibles sont remplies
+        System.out.println("Game Over! You won!");
+        // Ici, vous pouvez ajouter du code pour terminer le jeu, par exemple en affichant un message de victoire
     }
 }
