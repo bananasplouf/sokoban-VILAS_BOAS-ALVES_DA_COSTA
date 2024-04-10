@@ -46,6 +46,10 @@ public class Game extends Observable
     public Tile[][] getGrid() {
         return entityGrid;
     }
+
+    public int getCurrentHero() {
+        return currentHero;
+    }
     
     public Hero getHero(int i) {
         return heroes.get(i);

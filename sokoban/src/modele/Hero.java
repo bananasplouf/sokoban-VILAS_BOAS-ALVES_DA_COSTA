@@ -15,6 +15,10 @@ public class Hero extends Entity
         super(_game, t);
     }
 
+    public boolean isSleeping() {
+        return getIndex() != game.getCurrentHero();
+    }
+
     public int getIndex() {
         return game.getHeroIndex(this);
     }

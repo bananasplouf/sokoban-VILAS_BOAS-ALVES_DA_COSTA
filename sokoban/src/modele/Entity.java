@@ -37,8 +37,6 @@ public abstract class Entity extends Obj
     }
 
     @Override
-    public String mapString() {
-        return "";
-    }
+    public abstract String mapString();
 
 }

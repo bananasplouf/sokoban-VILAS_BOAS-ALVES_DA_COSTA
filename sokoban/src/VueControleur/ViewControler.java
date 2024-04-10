@@ -210,10 +210,15 @@ public class ViewControler extends JFrame implements Observer
 
                     if (e != null)
                     {
-                        if (t.getEntity() instanceof Hero)
-                        {
-                            tabJLabel[x][y].setIcon(resizeIcon(icoHero[((Hero) t.getEntity() ).getIndex() ],(int)(spriteSize*ratioX),(int)(spriteSize*ratioY)));
-                            tabJLabel[x][y].setSize((int)(spriteSize*ratioX),(int)(spriteSize*ratioY));
+                        if (t.getEntity() instanceof Hero) {
+                            if (((Hero) t.getEntity()).isSleeping()) {
+                                tabJLabel[x][y].setIcon(resizeIcon(icoSleepingHero[((Hero) t.getEntity()).getIndex()], (int) (spriteSize * ratioX), (int) (spriteSize * ratioY)));
+                                tabJLabel[x][y].setSize((int) (spriteSize * ratioX), (int) (spriteSize * ratioY));
+                            }
+                            else {
+                                tabJLabel[x][y].setIcon(resizeIcon(icoHero[((Hero) t.getEntity()).getIndex()], (int) (spriteSize * ratioX), (int) (spriteSize * ratioY)));
+                                tabJLabel[x][y].setSize((int) (spriteSize * ratioX), (int) (spriteSize * ratioY));
+                            }
                         }
                         else if (t.getEntity() instanceof Block)
                         {
