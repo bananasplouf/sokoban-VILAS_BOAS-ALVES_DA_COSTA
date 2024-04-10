@@ -10,4 +10,8 @@ public class Empty extends Tile
     {
         return e == null;
     }
+    @Override
+    public String mapString() {
+        return "_";
+    }
 }

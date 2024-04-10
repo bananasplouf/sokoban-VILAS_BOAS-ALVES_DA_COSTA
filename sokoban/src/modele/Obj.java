@@ -10,4 +10,5 @@ public abstract class Obj
     {
         game = _game;
     }
+public abstract String mapString();
 }

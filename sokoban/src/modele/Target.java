@@ -15,7 +15,15 @@ public class Target extends Tile {
         return true;
     }
 
+    public int getIndex() {
+        return game.getTargetIndex(this);
+    }
+
     public boolean isFilled() {
         return e instanceof Block;
+    }
+    @Override
+    public String mapString() {
+        return "T" + getIndex();
     }
 }

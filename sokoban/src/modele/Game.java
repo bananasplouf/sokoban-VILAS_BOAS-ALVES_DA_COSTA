@@ -198,20 +198,7 @@ public class Game extends Observable
             writer.println(SIZE_Y);
             for (int i = 0; i < SIZE_Y; i++) {
                 for (int j = 0; j < SIZE_X; j++) {
-                    Tile t = entityGrid[j][i];
-                    String type = "";
-                    if (t.getEntity() instanceof Block) {
-                        type = "B" + blocks.indexOf(t.getEntity());
-                    } else if (t instanceof Target) {
-                        type = "T" + targets.indexOf(t);
-                    } else if (t.getEntity() instanceof Hero) {
-                        type = "H"+ heroes.indexOf(t.getEntity());
-                    } else if (t instanceof Empty) {
-                        type = "_";
-                    } else if (t instanceof Wall) {
-                        type = "W";
-                    }
-                    writer.print( type + ",");
+                    writer.print( entityGrid[j][i].mapString() + ",");
                 }
                 writer.println();
             }
@@ -231,18 +218,10 @@ public class Game extends Observable
         Hero[] tempHeroes = new Hero[ 256 ];
         Block[] tempBlocks = new Block[ 256 ];
         Target[] tempTargets = new Target[ 256 ];
-        for (int x = 1; x < SIZE_X-1; x++)
-        {
-            for (int y = 1; y < 9; y++)
-            {
-                addTile(new Empty(this), x, y);
-            }
-        }
         try {
             BufferedReader reader = new BufferedReader(new FileReader(fileName));
             int x = Integer.parseInt(reader.readLine());
             int y = Integer.parseInt(reader.readLine());
-            Tile[][] entityGrid = new Tile[x][y];
             for (int i = 0; i < y; i++) {
                 String line = reader.readLine();
                 String[] tiles = line.split(",");
@@ -253,7 +232,6 @@ public class Game extends Observable
                     if (matcher.find()) {
                         String letter = matcher.group(1);
                         int num = Integer.parseInt(matcher.group(2));
-                        System.out.println("lettre num : " + letter + " " + num);
                         switch (letter) {
 
                             case "B":
@@ -262,10 +240,8 @@ public class Game extends Observable
                                 entityGrid[j][i].setEntity(tempBlocks[num]);
                                 break;
                             case "H":
-                                System.out.println("hero : " + tempHeroes[num]);
                                 addTile(new Empty(this), j, i);
                                 tempHeroes[num] = new Hero(this, entityGrid[j][i]);
-
                                 entityGrid[j][i].setEntity(tempHeroes[num]);
                                 break;
                             case "T":
