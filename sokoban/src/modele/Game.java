@@ -96,17 +96,21 @@ public class Game extends Observable
 
         for (int x = 1; x < SIZE_X-1; x++)
         {
-            for (int y = 1; y < 9; y++)
+            for (int y = 1; y < SIZE_Y-1; y++)
             {
                 addTile(new Empty(this), x, y);
             }
         }
 
         heroes.add(new Hero(this, entityGrid[4][4]));
+        heroes.add(new Hero( this, entityGrid[4][5]));
         blocks.add(new Block(this, entityGrid[6][6]));
+        blocks.add(new Block(this, entityGrid[6][7]));
 
         targets.add(new Target(this));
         addTile(targets.get(0), 17, 7);
+        targets.add(new Target(this));
+        addTile(targets.get(1),17 , 6);
     }
 
     private void addTile(Tile e, int x, int y) {
