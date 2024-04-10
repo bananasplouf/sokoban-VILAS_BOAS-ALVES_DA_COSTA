@@ -39,7 +39,7 @@ public class Game extends Observable
 
     public Game()
     {
-        game.readMapFromFile("maps/level1");
+        readMapFromFile("maps/level1");
     }
 
 
@@ -221,6 +221,13 @@ public class Game extends Observable
         Hero[] tempHeroes = new Hero[ 256 ];
         Block[] tempBlocks = new Block[ 256 ];
         Target[] tempTargets = new Target[ 256 ];
+        for (int x = 1; x < SIZE_X-1; x++)
+        {
+            for (int y = 1; y < 9; y++)
+            {
+                addTile(new Empty(this), x, y);
+            }
+        }
         try {
             BufferedReader reader = new BufferedReader(new FileReader(fileName));
             int x = Integer.parseInt(reader.readLine());
@@ -231,20 +238,24 @@ public class Game extends Observable
                 String[] tiles = line.split(",");
                 for (int j = 0; j < x; j++) {
                     String type = tiles[j];
-                    Pattern pattern = Pattern.compile("[HBT](\\d+)");
+                    Pattern pattern = Pattern.compile("([HBT])(\\d+)");
                     Matcher matcher = pattern.matcher(type);
                     if (matcher.find()) {
-                        String letter = matcher.group(0);
-                        int num = Integer.parseInt(matcher.group(1));
+                        String letter = matcher.group(1);
+                        int num = Integer.parseInt(matcher.group(2));
+                        System.out.println("lettre num : " + letter + " " + num);
                         switch (letter) {
+
                             case "B":
-                                tempBlocks[num] = new Block(this, entityGrid[j][i]);
                                 addTile(new Empty(this), j, i);
+                                tempBlocks[num] = new Block(this, entityGrid[j][i]);
                                 entityGrid[j][i].setEntity(tempBlocks[num]);
                                 break;
                             case "H":
-                                tempHeroes[num] = new Hero(this, entityGrid[j][i]);
+                                System.out.println("hero : " + tempHeroes[num]);
                                 addTile(new Empty(this), j, i);
+                                tempHeroes[num] = new Hero(this, entityGrid[j][i]);
+
                                 entityGrid[j][i].setEntity(tempHeroes[num]);
                                 break;
                             case "T":
@@ -269,21 +280,20 @@ public class Game extends Observable
             blocks.clear();
             targets.clear();
             for (Hero hero : tempHeroes) {
-
-            if (hero != null) {
-                heroes.add(hero);
+                if (hero != null) {
+                    heroes.add(hero);
+                }
             }
-        }
-        for (Block block : tempBlocks) {
-            if (block != null) {
-                blocks.add(block);
+            for (Block block : tempBlocks) {
+                if (block != null) {
+                    blocks.add(block);
+                }
             }
-        }
-        for (Target target : tempTargets) {
-            if (target != null) {
-                targets.add(target);
+            for (Target target : tempTargets) {
+                if (target != null) {
+                    targets.add(target);
+                }
             }
-        }
         } catch (IOException e) {
             System.out.println("An error occurred while reading from the file.");
             e.printStackTrace();
