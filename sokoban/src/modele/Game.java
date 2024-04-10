@@ -300,4 +300,7 @@ public class Game extends Observable
         System.out.println("Game Over! You won!");
         // Ici, vous pouvez ajouter du code pour terminer le jeu, par exemple en affichant un message de victoire
     }
+    public void switchUser(){
+        currentHero = (currentHero + 1) % heroes.size() ;
+    }
 }
