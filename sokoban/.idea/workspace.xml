@@ -5,22 +5,27 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="baf99f6f-f684-484b-8035-53f217639bb4" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/sokoban.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/sokoban/Main.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/sokoban/VueControleur/ViewControler$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/sokoban/VueControleur/ViewControler.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/sokoban/VueControleur/ViewMenu.class" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/Images/Target.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Images/Target.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/modele/Target.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/sokoban/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/sokoban/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/sokoban/VueControleur/ViewControler$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/sokoban/VueControleur/ViewControler$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/sokoban/VueControleur/ViewControler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/sokoban/VueControleur/ViewControler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/sokoban/VueControleur/ViewMenu.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/sokoban/VueControleur/ViewMenu.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/sokoban/modele/Block.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/sokoban/modele/Block.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/sokoban/modele/Direction.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/sokoban/modele/Empty.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/sokoban/modele/Direction.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/sokoban/modele/Direction.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/sokoban/modele/Empty.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/sokoban/modele/Empty.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/sokoban/modele/Entity.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/sokoban/modele/Entity.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/sokoban/modele/Game$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/sokoban/modele/Game.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/sokoban/modele/Hero.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/sokoban/modele/Game$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/sokoban/modele/Game$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/sokoban/modele/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/sokoban/modele/Game.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/sokoban/modele/Hero.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/sokoban/modele/Hero.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/sokoban/modele/Obj.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/sokoban/modele/Obj.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/sokoban/modele/Tile.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/sokoban/modele/Wall.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/sokoban/modele/Tile.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/sokoban/modele/Tile.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/sokoban/modele/Wall.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/sokoban/modele/Wall.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/VueControleur/ViewControler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/VueControleur/ViewControler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modele/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/modele/Game.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,13 +49,18 @@
   &quot;associatedIndex&quot;: 6
 }</component>
   <component name="ProjectId" id="2epqbGtoYGrlusLaWl2VhcN8CyS" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
     &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;Application.sokoban.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
@@ -61,19 +71,14 @@
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
   <component name="RunManager">
-    <configuration default="true" type="JetRunConfigurationType">
+    <configuration name="sokoban" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="sokoban" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
-      <module name="sokoban" />
-      <option name="filePath" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -95,7 +100,10 @@
       <workItem from="1712697092700" duration="27000" />
       <workItem from="1712697136600" duration="262000" />
       <workItem from="1712697472908" duration="318000" />
-      <workItem from="1712697798774" duration="49000" />
+      <workItem from="1712697798774" duration="10257000" />
+      <workItem from="1712731970462" duration="1014000" />
+      <workItem from="1712732991479" duration="19000" />
+      <workItem from="1712735076421" duration="5416000" />
     </task>
     <servers />
   </component>
@@ -112,5 +120,8 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
 </project>
