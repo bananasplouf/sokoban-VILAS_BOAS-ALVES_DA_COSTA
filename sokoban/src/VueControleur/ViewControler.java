@@ -98,6 +98,7 @@ public class ViewControler extends JFrame implements Observer
                     case KeyEvent.VK_UP : game.moveHero(Direction.haut); game.checkGameOver(); break;
                     case KeyEvent.VK_ESCAPE: game.quit(); game.checkGameOver(); break;
                     case KeyEvent.VK_F11: fullscreen(); game.checkGameOver(); break;
+                    case KeyEvent.VK_S: game.switchUser(); game.checkGameOver(); break;
 
 
                 }

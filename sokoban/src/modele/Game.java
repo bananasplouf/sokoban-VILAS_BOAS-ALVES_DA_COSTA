@@ -312,7 +312,7 @@ public class Game extends Observable
 
     public void checkGameOver() {
         for (int i = 0; i < targets.size(); i++) {
-            if (!targets.get(i).isFilled()) {
+            if ( !targets.get(i).isFilled() || blocks.indexOf( targets.get(i).getEntity() ) == i){
                 return;
             }
         }
