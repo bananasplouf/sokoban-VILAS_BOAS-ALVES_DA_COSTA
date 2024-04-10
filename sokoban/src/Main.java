@@ -18,7 +18,7 @@ public class Main
         Game game = new Game();
         Observable o = new Observable();
         Object ob = new Object();
-        
+
         ViewControler vc = new ViewControler(game);
         while(true)
         {

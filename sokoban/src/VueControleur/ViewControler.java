@@ -51,6 +51,8 @@ public class ViewControler extends JFrame implements Observer
     private ImageIcon icoVide;
     private ImageIcon icoMur;
     private ImageIcon icoBloc;
+    private ImageIcon icoTarget;
+    private ImageIcon icoSleepingHero;
 
 
     private JLabel[][] tabJLabel; // cases graphique (au moment du rafraichissement, chaque case va être associée à une icône, suivant ce qui est présent dans le modèle)
@@ -88,12 +90,12 @@ public class ViewControler extends JFrame implements Observer
                 switch(e.getKeyCode())
                 {  // on regarde quelle touche a été pressée
 
-                    case KeyEvent.VK_LEFT : game.moveHero(Direction.gauche); break;
-                    case KeyEvent.VK_RIGHT : game.moveHero(Direction.droite); break;
-                    case KeyEvent.VK_DOWN : game.moveHero(Direction.bas); break;
-                    case KeyEvent.VK_UP : game.moveHero(Direction.haut); break;
-                    case KeyEvent.VK_ESCAPE: game.quit(); break;
-                    case KeyEvent.VK_F11: fullscreen(); break;
+                    case KeyEvent.VK_LEFT : game.moveHero(Direction.gauche); game.checkGameOver(); break;
+                    case KeyEvent.VK_RIGHT : game.moveHero(Direction.droite); game.checkGameOver(); break;
+                    case KeyEvent.VK_DOWN : game.moveHero(Direction.bas); game.checkGameOver(); break;
+                    case KeyEvent.VK_UP : game.moveHero(Direction.haut); game.checkGameOver(); break;
+                    case KeyEvent.VK_ESCAPE: game.quit(); game.checkGameOver(); break;
+                    case KeyEvent.VK_F11: fullscreen(); game.checkGameOver(); break;
 
 
                 }
@@ -132,6 +134,8 @@ public class ViewControler extends JFrame implements Observer
         icoVide = loadIcons("Images/Empty.png");
         icoMur = loadIcons("Images/wallv2.png");
         icoBloc = loadIcons("Images/Colonne.png");
+        icoTarget = loadIcons("Images/Target.png");
+        icoSleepingHero = loadIcons("Images/ZZZ.png");
     }
 
     private ImageIcon loadIcons(String urlIcone)
@@ -201,26 +205,32 @@ public class ViewControler extends JFrame implements Observer
                     {
                         if (t.getEntity() instanceof Hero)
                         {
-                            tabJLabel[x][y].setIcon(icoHero);
+                            tabJLabel[x][y].setIcon(resizeIcon(icoHero,(int)(spriteSize*ratioX),(int)(spriteSize*ratioY)));
                             tabJLabel[x][y].setSize((int)(spriteSize*ratioX),(int)(spriteSize*ratioY));
                         }
                         else if (t.getEntity() instanceof Block)
                         {
                             tabJLabel[x][y].setSize((int)(spriteSize*ratioX),(int)(spriteSize*ratioY));
-                            tabJLabel[x][y].setIcon(icoBloc);
+                            tabJLabel[x][y].setIcon(resizeIcon(icoBloc,(int)(spriteSize*ratioX),(int)(spriteSize*ratioY)));
                         }
                     }
                     else
                     {
-                        if (game.getGrid()[x][y] instanceof Wall)
-                        {
+                        if (t instanceof Target) {
+
+                            tabJLabel[x][y].setIcon(resizeIcon(icoTarget,(int)(spriteSize*ratioX),(int)(spriteSize*ratioY)));
                             tabJLabel[x][y].setSize((int)(spriteSize*ratioX),(int)(spriteSize*ratioY));
-                            tabJLabel[x][y].setIcon(icoMur);
                         }
-                        else if (game.getGrid()[x][y] instanceof Empty)
+                        else if (t instanceof Wall)
                         {
                             tabJLabel[x][y].setSize((int)(spriteSize*ratioX),(int)(spriteSize*ratioY));
-                            tabJLabel[x][y].setIcon(icoVide);
+                            tabJLabel[x][y].setIcon(resizeIcon(icoMur,(int)(spriteSize*ratioX),(int)(spriteSize*ratioY)));
+                        }
+                        else if (t instanceof Empty)
+                        {
+
+                            tabJLabel[x][y].setSize((int)(spriteSize*ratioX),(int)(spriteSize*ratioY));
+                            tabJLabel[x][y].setIcon(resizeIcon(icoVide,(int)(spriteSize*ratioX),(int)(spriteSize*ratioY)));
                         }
                     }
 
@@ -250,5 +260,11 @@ public class ViewControler extends JFrame implements Observer
                 });
         */
 
+    }
+
+    public ImageIcon resizeIcon(ImageIcon icon, int newWidth, int newHeight) {
+        Image img = icon.getImage();
+        Image resizedImage = img.getScaledInstance(newWidth, newHeight,  java.awt.Image.SCALE_SMOOTH);
+        return new ImageIcon(resizedImage);
     }
 }
