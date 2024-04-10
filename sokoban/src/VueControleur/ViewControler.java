@@ -1,6 +1,8 @@
 package VueControleur;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
@@ -34,7 +36,9 @@ public class ViewControler extends JFrame implements Observer
 
     private final Dimension screenSize;
 
-    //private ViewMenu menuFrame;
+    private ViewMenu menuFrame;
+
+    private ViewSelectLevel selectframe;
 
     int maxWindowSizeX;
 
@@ -46,11 +50,24 @@ public class ViewControler extends JFrame implements Observer
 
     private final int spriteSize;
 
+    private Timer timer;
+    private JLabel timerLabel;
+    private int secondsElapsed;
+
+
+
+
+
+
     // icones affichées dans la grille
-    private ImageIcon icoHero;
-    private ImageIcon icoVide;
-    private ImageIcon icoMur;
-    private ImageIcon icoBloc;
+    private ImageIcon icoHeroMin;
+    private ImageIcon icoHeroMax;
+    private ImageIcon icoVideMin;
+    private ImageIcon icoVideMax;
+    private ImageIcon icoMurMin;
+    private ImageIcon icoMurMax;
+    private ImageIcon icoBlocMin;
+    private ImageIcon icoBlocMax;
 
 
     private JLabel[][] tabJLabel; // cases graphique (au moment du rafraichissement, chaque case va être associée à une icône, suivant ce qui est présent dans le modèle)
@@ -68,16 +85,24 @@ public class ViewControler extends JFrame implements Observer
         maxWindowSizeX = (int) screenSize.getWidth();
         maxWindowSizeY = (int) screenSize.getHeight(); ;
         isFullscreen = false;
-        //menuFrame = new ViewMenu(sizeWindowX,sizeWindowY);
-
+        menuFrame = new ViewMenu(sizeWindowX,sizeWindowY);
+        selectframe = new ViewSelectLevel(sizeWindowX,sizeWindowY);
         loadIcons();
+        timerLabel = new JLabel("Time: 0 s");
+        add(timerLabel);
+        pack();
+        Color c = new Color(255,0,0);
+        timerLabel.setForeground(c);
+        timerLabel.setSize(256,256);
         addGraphicComponents();
         addKeyboardListener();
 
         game.addObserver(this);
 
         UpdateDisplay();
+        switchWindows();
     }
+
     private void addKeyboardListener()
     {
         addKeyListener(new KeyAdapter()
@@ -87,29 +112,34 @@ public class ViewControler extends JFrame implements Observer
             {
                 switch(e.getKeyCode())
                 {  // on regarde quelle touche a été pressée
-
                     case KeyEvent.VK_LEFT : game.moveHero(Direction.gauche); break;
                     case KeyEvent.VK_RIGHT : game.moveHero(Direction.droite); break;
                     case KeyEvent.VK_DOWN : game.moveHero(Direction.bas); break;
                     case KeyEvent.VK_UP : game.moveHero(Direction.haut); break;
                     case KeyEvent.VK_ESCAPE: game.quit(); break;
                     case KeyEvent.VK_F11: fullscreen(); break;
-
-
                 }
             }
         });
     }
 
-    /*public void switchWindows()
+    public void switchWindows()
     {
-        while (menuFrame.isVisible())
+        while (!menuFrame.getNext())
         {
             menuFrame.setVisible(true);
-            //setVisible(false);
         }
-
-    }*/
+        while (menuFrame.getNext() && !menuFrame.getLevel())
+        {
+            menuFrame.dispose();
+            setVisible(true);
+        }
+        while (menuFrame.getLevel())
+        {
+            menuFrame.dispose();
+            selectframe.setVisible(true);
+        }
+    }
 
     private void fullscreen()
     {
@@ -117,21 +147,27 @@ public class ViewControler extends JFrame implements Observer
         {
             setSize(maxWindowSizeX, maxWindowSizeY);
             isFullscreen = true;
+            UpdateDisplay();
         }
         else
         {
             setSize(sizeWindowX,sizeWindowY);
             setLocationRelativeTo(null);
             isFullscreen = false;
+            UpdateDisplay();
         }
     }
 
     private void loadIcons()
     {
-        icoHero = loadIcons("Images/Pacman.png");
-        icoVide = loadIcons("Images/Empty.png");
-        icoMur = loadIcons("Images/wallv2.png");
-        icoBloc = loadIcons("Images/Colonne.png");
+        icoHeroMin = loadIcons("Images/HeroeMin.png");
+        icoHeroMax = loadIcons("Images/HeroeMax.png");
+        icoVideMin = loadIcons("Images/EmptyMin.png");
+        icoVideMax = loadIcons("Images/EmptyMax.png");
+        icoMurMin = loadIcons("Images/wallMin.png");
+        icoMurMax = loadIcons("Images/wallMax.png");
+        icoBlocMin = loadIcons("Images/ColumnMin.png");
+        icoBlocMax = loadIcons("Images/ColumnMax.png");
     }
 
     private ImageIcon loadIcons(String urlIcone)
@@ -147,6 +183,20 @@ public class ViewControler extends JFrame implements Observer
             return null;
         }
         return new ImageIcon(image);
+    }
+
+    private void updateTimerLabel()
+    {
+        timerLabel.setText("Time: " + secondsElapsed + " s");
+    }
+
+    public void startTimer() {
+        secondsElapsed = 0;
+        timer.start();
+    }
+
+    public void stopTimer() {
+        timer.stop();
     }
 
     private void addGraphicComponents()
@@ -170,20 +220,26 @@ public class ViewControler extends JFrame implements Observer
             }
         }
         add(grilleJLabels);
-        setVisible(true);
     }
-
     
     /**
      * Il y a une grille du côté du modèle ( jeu.getGrille() ) et une grille du côté de la vue (tabJLabel)
      */
     private void UpdateDisplay()
     {
+        timer = new Timer(1000, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                secondsElapsed++;
+                updateTimerLabel();
+            }
+        });
+        timer.start();
         Dimension r = getSize();
-        sizeWindowX = r.width;
-        sizeWindowY = r.height;
-        float ratioX = (float) sizeWindowX/maxWindowSizeX;
-        float ratioY = (float) sizeWindowY/maxWindowSizeY;
+        int widthWindow = r.width;
+        int heightWindow = r.height;
+        float ratioX = (float) widthWindow/maxWindowSizeX;
+        float ratioY = (float) heightWindow/maxWindowSizeY;
 
 
         for (int x = 0; x < sizeX; x++)
@@ -201,26 +257,56 @@ public class ViewControler extends JFrame implements Observer
                     {
                         if (t.getEntity() instanceof Hero)
                         {
-                            tabJLabel[x][y].setIcon(icoHero);
-                            tabJLabel[x][y].setSize((int)(spriteSize*ratioX),(int)(spriteSize*ratioY));
+                            if(!isFullscreen)
+                            {
+                                tabJLabel[x][y].setSize((int)(spriteSize*ratioX),(int)(spriteSize*ratioY));
+                                tabJLabel[x][y].setIcon(icoHeroMin);
+                            }
+                            else
+                            {
+                                tabJLabel[x][y].setIcon(icoHeroMax);
+                            }
                         }
                         else if (t.getEntity() instanceof Block)
                         {
-                            tabJLabel[x][y].setSize((int)(spriteSize*ratioX),(int)(spriteSize*ratioY));
-                            tabJLabel[x][y].setIcon(icoBloc);
+                            if(!isFullscreen)
+                            {
+                                tabJLabel[x][y].setSize((int)(spriteSize*ratioX),(int)(spriteSize*ratioY));
+                                tabJLabel[x][y].setIcon(icoBlocMin);
+                            }
+                            else
+                            {
+                                tabJLabel[x][y].setSize((int)(spriteSize*ratioX),(int)(spriteSize*ratioY));
+                                tabJLabel[x][y].setIcon(icoBlocMax);
+                            }
                         }
                     }
                     else
                     {
                         if (game.getGrid()[x][y] instanceof Wall)
                         {
-                            tabJLabel[x][y].setSize((int)(spriteSize*ratioX),(int)(spriteSize*ratioY));
-                            tabJLabel[x][y].setIcon(icoMur);
+                            if(!isFullscreen)
+                            {
+                                tabJLabel[x][y].setSize((int)(spriteSize*ratioX),(int)(spriteSize*ratioY));
+                                tabJLabel[x][y].setIcon(icoMurMin);
+                            }
+                            else
+                            {
+                                tabJLabel[x][y].setIcon(icoMurMax);
+                            }
                         }
                         else if (game.getGrid()[x][y] instanceof Empty)
                         {
-                            tabJLabel[x][y].setSize((int)(spriteSize*ratioX),(int)(spriteSize*ratioY));
-                            tabJLabel[x][y].setIcon(icoVide);
+                            if(!isFullscreen)
+                            {
+                                tabJLabel[x][y].setSize((int)(spriteSize*ratioX),(int)(spriteSize*ratioY));
+                                tabJLabel[x][y].setIcon(icoVideMin);
+                            }
+                            else
+                            {
+                                tabJLabel[x][y].setSize((int)(spriteSize*ratioX),(int)(spriteSize*ratioY));
+                                tabJLabel[x][y].setIcon(icoVideMax);
+                            }
                         }
                     }
 

@@ -1,6 +1,8 @@
 
 import VueControleur.ViewControler;
 import modele.Game;
+
+import java.util.Objects;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -10,22 +12,18 @@ import java.util.Observer;
  * and open the template in the editor.
  */
 
-
 public class Main
 {
     public static void main(String[] args)
     {
         Game game = new Game();
-        Observable o = new Observable();
-        Object ob = new Object();
+        Observable observer = new Observable();
+        Object o = new Object();
         
         ViewControler vc = new ViewControler(game);
-        while(true)
+        while (true)
         {
-            //vc.switchWindows();
-            vc.update(o,ob);
+            vc.update(observer,o);
         }
-
-
     }
 }
