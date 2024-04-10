@@ -14,4 +14,13 @@ public class Block extends Entity
         return game.moveEntity(this, d);
     }
 
+    public int getIndex() {
+        return game.getBlockIndex(this);
+    }
+
+    @Override
+    public String mapString() {
+        return "B" + getIndex();
+    }
+
 }

@@ -36,4 +36,9 @@ public abstract class Entity extends Obj
         return game.moveEntity(this, d);
     }
 
+    @Override
+    public String mapString() {
+        return "";
+    }
+
 }

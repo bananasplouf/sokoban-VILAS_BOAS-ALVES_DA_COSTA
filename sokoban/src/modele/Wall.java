@@ -9,4 +9,9 @@ public class Wall extends Tile
     {
         return false;
     }
+    @Override
+    public String mapString()
+    {
+        return "W";
+    }
 }

@@ -17,13 +17,6 @@ public class Main
     public static void main(String[] args)
     {
         Game game = new Game();
-        Observable observer = new Observable();
-        Object o = new Object();
-        
         ViewControler vc = new ViewControler(game);
-        while (true)
-        {
-            vc.update(observer,o);
-        }
     }
 }
