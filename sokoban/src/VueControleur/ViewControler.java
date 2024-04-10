@@ -47,12 +47,14 @@ public class ViewControler extends JFrame implements Observer
     private final int spriteSize;
 
     // icones affichées dans la grille
-    private ImageIcon icoHero;
+
     private ImageIcon icoVide;
     private ImageIcon icoMur;
-    private ImageIcon icoBloc;
-    private ImageIcon icoTarget;
-    private ImageIcon icoSleepingHero;
+    private ImageIcon[] icoHero = new ImageIcon[5];
+    private ImageIcon[] icoSleepingHero = new ImageIcon[5];
+    private ImageIcon[] icoBloc = new ImageIcon[5];
+    private ImageIcon[] icoTarget = new ImageIcon[5];
+
 
 
     private JLabel[][] tabJLabel; // cases graphique (au moment du rafraichissement, chaque case va être associée à une icône, suivant ce qui est présent dans le modèle)
@@ -130,12 +132,16 @@ public class ViewControler extends JFrame implements Observer
 
     private void loadIcons()
     {
-        icoHero = loadIcons("Images/Pacman.png");
         icoVide = loadIcons("Images/Empty.png");
         icoMur = loadIcons("Images/wallv2.png");
-        icoBloc = loadIcons("Images/Colonne.png");
-        icoTarget = loadIcons("Images/Target.png");
-        icoSleepingHero = loadIcons("Images/ZZZ.png");
+        for (int i = 0; i < 5; i++)
+        {
+            icoHero[i] = loadIcons("Images/Heroe"+i+".png");
+            icoSleepingHero[i] = loadIcons("Images/ZZZ"+i+".png");
+            icoBloc[i] = loadIcons("Images/Colonne"+i+".png");
+            icoTarget[i] = loadIcons("Images/Target"+i+".png");
+        }
+        
     }
 
     private ImageIcon loadIcons(String urlIcone)
@@ -205,20 +211,20 @@ public class ViewControler extends JFrame implements Observer
                     {
                         if (t.getEntity() instanceof Hero)
                         {
-                            tabJLabel[x][y].setIcon(resizeIcon(icoHero,(int)(spriteSize*ratioX),(int)(spriteSize*ratioY)));
+                            tabJLabel[x][y].setIcon(resizeIcon(icoHero[((Hero) t.getEntity() ).getIndex() ],(int)(spriteSize*ratioX),(int)(spriteSize*ratioY)));
                             tabJLabel[x][y].setSize((int)(spriteSize*ratioX),(int)(spriteSize*ratioY));
                         }
                         else if (t.getEntity() instanceof Block)
                         {
                             tabJLabel[x][y].setSize((int)(spriteSize*ratioX),(int)(spriteSize*ratioY));
-                            tabJLabel[x][y].setIcon(resizeIcon(icoBloc,(int)(spriteSize*ratioX),(int)(spriteSize*ratioY)));
+                            tabJLabel[x][y].setIcon(resizeIcon(icoBloc[((Block) t.getEntity()).getIndex()],(int)(spriteSize*ratioX),(int)(spriteSize*ratioY)));
                         }
                     }
                     else
                     {
                         if (t instanceof Target) {
 
-                            tabJLabel[x][y].setIcon(resizeIcon(icoTarget,(int)(spriteSize*ratioX),(int)(spriteSize*ratioY)));
+                            tabJLabel[x][y].setIcon(resizeIcon(icoTarget[((Target) t).getIndex()],(int)(spriteSize*ratioX),(int)(spriteSize*ratioY)));
                             tabJLabel[x][y].setSize((int)(spriteSize*ratioX),(int)(spriteSize*ratioY));
                         }
                         else if (t instanceof Wall)

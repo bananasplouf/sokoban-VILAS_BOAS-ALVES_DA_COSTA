@@ -14,4 +14,12 @@ public class Hero extends Entity
     {
         super(_game, t);
     }
+
+    public int getIndex() {
+        return game.getHeroIndex(this);
+    }
+    @Override
+    public String mapString() {
+        return "H" + getIndex();
+    }
 }

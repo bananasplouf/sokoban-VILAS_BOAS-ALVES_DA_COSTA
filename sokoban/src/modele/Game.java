@@ -34,7 +34,6 @@ public class Game extends Observable
     private final List<Target> targets = new ArrayList<>();
     private final List<Block> blocks = new ArrayList<>();
     private int currentHero = 0;
-    private int maxHero = 3;
 
 
     public Game()
@@ -59,6 +58,17 @@ public class Game extends Observable
     }
     public void moveHero(Direction d) {
         moveHero(d,currentHero);
+    }
+
+    public int getBlockIndex(Block b) {
+        return blocks.indexOf(b);
+    }
+    public int getTargetIndex(Target t) {
+        return targets.indexOf(t);
+    }
+
+    public int getHeroIndex(Hero h) {
+        return heroes.indexOf(h);
     }
 
 
