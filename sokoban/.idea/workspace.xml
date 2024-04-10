@@ -5,10 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="baf99f6f-f684-484b-8035-53f217639bb4" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Images/Target.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Images/Target.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modele/Target.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/Target.png" beforeDir="false" afterPath="$PROJECT_DIR$/Images/Target.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/sokoban/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/sokoban/Main.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/sokoban/VueControleur/ViewControler$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/sokoban/VueControleur/ViewControler$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/sokoban/VueControleur/ViewControler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/sokoban/VueControleur/ViewControler.class" afterDir="false" />
@@ -26,6 +23,7 @@
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/VueControleur/ViewControler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/VueControleur/ViewControler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/modele/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/modele/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modele/Target.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/modele/Target.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -103,7 +101,7 @@
       <workItem from="1712697798774" duration="10257000" />
       <workItem from="1712731970462" duration="1014000" />
       <workItem from="1712732991479" duration="19000" />
-      <workItem from="1712735076421" duration="5416000" />
+      <workItem from="1712735076421" duration="5750000" />
     </task>
     <servers />
   </component>
