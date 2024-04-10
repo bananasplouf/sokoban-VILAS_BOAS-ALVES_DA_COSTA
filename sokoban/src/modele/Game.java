@@ -121,8 +121,6 @@ public class Game extends Observable
         entityGrid[x][y] = e;
         map.put(e, new Point(x, y));
     }
-
-
     /**
      * Si le déplacement de l'entité est autorisé (pas de mur ou autre entité), il est réalisé
      * Sinon, rien n'est fait.

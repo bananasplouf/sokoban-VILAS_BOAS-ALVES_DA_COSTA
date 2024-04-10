@@ -1,6 +1,8 @@
 package VueControleur;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
@@ -34,7 +36,9 @@ public class ViewControler extends JFrame implements Observer
 
     private final Dimension screenSize;
 
-    //private ViewMenu menuFrame;
+    private ViewMenu menuFrame;
+
+    private ViewSelectLevel selectframe;
 
     int maxWindowSizeX;
 
@@ -46,6 +50,15 @@ public class ViewControler extends JFrame implements Observer
 
     private final int spriteSize;
 
+    private Timer timer;
+    private JLabel timerLabel;
+    private int secondsElapsed;
+
+
+
+
+
+
     // icones affichées dans la grille
 
     private ImageIcon icoVide;
@@ -54,7 +67,6 @@ public class ViewControler extends JFrame implements Observer
     private ImageIcon[] icoSleepingHero = new ImageIcon[5];
     private ImageIcon[] icoBloc = new ImageIcon[5];
     private ImageIcon[] icoTarget = new ImageIcon[5];
-
 
 
     private JLabel[][] tabJLabel; // cases graphique (au moment du rafraichissement, chaque case va être associée à une icône, suivant ce qui est présent dans le modèle)
@@ -72,16 +84,24 @@ public class ViewControler extends JFrame implements Observer
         maxWindowSizeX = (int) screenSize.getWidth();
         maxWindowSizeY = (int) screenSize.getHeight(); ;
         isFullscreen = false;
-        //menuFrame = new ViewMenu(sizeWindowX,sizeWindowY);
-
+        menuFrame = new ViewMenu(sizeWindowX,sizeWindowY);
+        selectframe = new ViewSelectLevel(sizeWindowX,sizeWindowY);
         loadIcons();
+        timerLabel = new JLabel("Time: 0 s");
+        add(timerLabel);
+        pack();
+        Color c = new Color(255,0,0);
+        timerLabel.setForeground(c);
+        timerLabel.setSize(256,256);
         addGraphicComponents();
         addKeyboardListener();
 
         game.addObserver(this);
 
         UpdateDisplay();
+        switchWindows();
     }
+
     private void addKeyboardListener()
     {
         addKeyListener(new KeyAdapter()
@@ -100,21 +120,28 @@ public class ViewControler extends JFrame implements Observer
                     case KeyEvent.VK_F11: fullscreen(); game.checkGameOver(); break;
                     case KeyEvent.VK_S: game.switchUser(); game.checkGameOver(); break;
 
-
                 }
             }
         });
     }
 
-    /*public void switchWindows()
+    public void switchWindows()
     {
-        while (menuFrame.isVisible())
+        while (!menuFrame.getNext())
         {
             menuFrame.setVisible(true);
-            //setVisible(false);
         }
-
-    }*/
+        while (menuFrame.getNext() && !menuFrame.getLevel())
+        {
+            menuFrame.dispose();
+            setVisible(true);
+        }
+        while (menuFrame.getLevel())
+        {
+            menuFrame.dispose();
+            selectframe.setVisible(true);
+        }
+    }
 
     private void fullscreen()
     {
@@ -122,12 +149,14 @@ public class ViewControler extends JFrame implements Observer
         {
             setSize(maxWindowSizeX, maxWindowSizeY);
             isFullscreen = true;
+            UpdateDisplay();
         }
         else
         {
             setSize(sizeWindowX,sizeWindowY);
             setLocationRelativeTo(null);
             isFullscreen = false;
+            UpdateDisplay();
         }
     }
 
@@ -142,7 +171,6 @@ public class ViewControler extends JFrame implements Observer
             icoBloc[i] = loadIcons("Images/Colonne"+i+".png");
             icoTarget[i] = loadIcons("Images/Target"+i+".png");
         }
-        
     }
 
     private ImageIcon loadIcons(String urlIcone)
@@ -158,6 +186,20 @@ public class ViewControler extends JFrame implements Observer
             return null;
         }
         return new ImageIcon(image);
+    }
+
+    private void updateTimerLabel()
+    {
+        timerLabel.setText("Time: " + secondsElapsed + " s");
+    }
+
+    public void startTimer() {
+        secondsElapsed = 0;
+        timer.start();
+    }
+
+    public void stopTimer() {
+        timer.stop();
     }
 
     private void addGraphicComponents()
@@ -181,20 +223,26 @@ public class ViewControler extends JFrame implements Observer
             }
         }
         add(grilleJLabels);
-        setVisible(true);
     }
-
     
     /**
      * Il y a une grille du côté du modèle ( jeu.getGrille() ) et une grille du côté de la vue (tabJLabel)
      */
     private void UpdateDisplay()
     {
+        timer = new Timer(1000, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                secondsElapsed++;
+                updateTimerLabel();
+            }
+        });
+        timer.start();
         Dimension r = getSize();
-        sizeWindowX = r.width;
-        sizeWindowY = r.height;
-        float ratioX = (float) sizeWindowX/maxWindowSizeX;
-        float ratioY = (float) sizeWindowY/maxWindowSizeY;
+        int widthWindow = r.width;
+        int heightWindow = r.height;
+        float ratioX = (float) widthWindow/maxWindowSizeX;
+        float ratioY = (float) heightWindow/maxWindowSizeY;
 
 
         for (int x = 0; x < sizeX; x++)
