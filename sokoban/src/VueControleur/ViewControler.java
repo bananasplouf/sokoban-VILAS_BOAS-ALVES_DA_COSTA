@@ -162,8 +162,8 @@ public class ViewControler extends JFrame implements Observer
 
     private void loadIcons()
     {
-        icoVide = loadIcons("Images/Empty.png");
-        icoMur = loadIcons("Images/wallv2.png");
+        icoVide = loadIcons("Images/EmptyMax.png");
+        icoMur = loadIcons("Images/wallMax.png");
         for (int i = 0; i < 5; i++)
         {
             icoHero[i] = loadIcons("Images/Heroe"+i+".png");
