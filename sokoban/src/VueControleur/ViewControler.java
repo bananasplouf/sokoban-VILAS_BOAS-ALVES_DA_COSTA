@@ -261,16 +261,13 @@ public class ViewControler extends JFrame implements Observer
                         if (t.getEntity() instanceof Hero) {
                             if (((Hero) t.getEntity()).isSleeping()) {
                                 tabJLabel[x][y].setIcon(resizeIcon(icoSleepingHero[((Hero) t.getEntity()).getIndex()], (int) (spriteSize * ratioX), (int) (spriteSize * ratioY)));
-                                tabJLabel[x][y].setSize((int) (spriteSize * ratioX), (int) (spriteSize * ratioY));
                             }
                             else {
                                 tabJLabel[x][y].setIcon(resizeIcon(icoHero[((Hero) t.getEntity()).getIndex()], (int) (spriteSize * ratioX), (int) (spriteSize * ratioY)));
-                                tabJLabel[x][y].setSize((int) (spriteSize * ratioX), (int) (spriteSize * ratioY));
                             }
                         }
                         else if (t.getEntity() instanceof Block)
                         {
-                            tabJLabel[x][y].setSize((int)(spriteSize*ratioX),(int)(spriteSize*ratioY));
                             tabJLabel[x][y].setIcon(resizeIcon(icoBloc[((Block) t.getEntity()).getIndex()],(int)(spriteSize*ratioX),(int)(spriteSize*ratioY)));
                         }
                     }
@@ -279,17 +276,14 @@ public class ViewControler extends JFrame implements Observer
                         if (t instanceof Target) {
 
                             tabJLabel[x][y].setIcon(resizeIcon(icoTarget[((Target) t).getIndex()],(int)(spriteSize*ratioX),(int)(spriteSize*ratioY)));
-                            tabJLabel[x][y].setSize((int)(spriteSize*ratioX),(int)(spriteSize*ratioY));
                         }
                         else if (t instanceof Wall)
                         {
-                            tabJLabel[x][y].setSize((int)(spriteSize*ratioX),(int)(spriteSize*ratioY));
                             tabJLabel[x][y].setIcon(resizeIcon(icoMur,(int)(spriteSize*ratioX),(int)(spriteSize*ratioY)));
                         }
                         else if (t instanceof Empty)
                         {
 
-                            tabJLabel[x][y].setSize((int)(spriteSize*ratioX),(int)(spriteSize*ratioY));
                             tabJLabel[x][y].setIcon(resizeIcon(icoVide,(int)(spriteSize*ratioX),(int)(spriteSize*ratioY)));
                         }
                     }
